@@ -18,3 +18,15 @@ class Solution(object):
             count += 1
         arr[-1] = -1
         return arr
+
+
+class StraightForwardSolution(object):
+    def replaceElements(self, arr):
+        """
+        :type arr: List[int]
+        :rtype: List[int]
+        """
+        pre = -1
+        for i in range(len(arr) - 1, -1, -1):
+            arr[i], pre = pre, max(pre, arr[i])
+        return arr
