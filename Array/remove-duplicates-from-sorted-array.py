@@ -10,6 +10,7 @@ It does not matter what you leave beyond the first k elements.
 Return k after placing the final result in the first k slots of nums.
 '''
 
+
 class Solution(object):
     def removeDuplicates(self, nums):
         """
@@ -23,3 +24,19 @@ class Solution(object):
                 count += 1
 
         return len(nums)
+
+
+class TwoPointersSolution(object):
+    def removeDuplicates(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        length = len(nums)
+        if length < 1: return length
+        i = 0
+        for j in range(1, length):
+            if nums[j] != nums[i]:
+                i += 1
+                nums[i] = nums[j]
+        return i + 1
