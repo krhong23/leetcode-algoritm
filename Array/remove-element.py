@@ -9,6 +9,7 @@ It does not matter what you leave beyond the first k elements.
 Return k after placing the final result in the first k slots of nums.
 '''
 
+
 class Solution(object):
     def removeElement(self, nums, val):
         """
@@ -25,3 +26,20 @@ class Solution(object):
             nums.remove(val)
 
         return len(nums)
+
+
+class TwoPointerSolution(object):
+    def removeElement(self, nums, val):
+        """
+        :type nums: List[int]
+        :type val: int
+        :rtype: int
+        """
+        first, last = 0, len(nums)
+        while first < last:
+            if nums[first] == val:
+                nums[last - 1], nums[first] = nums[first], nums[last - 1]
+                last -= 1
+            else:
+                first += 1
+        return first
