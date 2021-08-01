@@ -14,3 +14,24 @@ class Solution(object):
                     arr[j] = arr[j - 1]
                 i += 1
             i += 1
+
+
+class TimeAndSpaceComplexitySolution(object):
+    def duplicateZeros(self, arr):
+        """
+        :type arr: List[int]
+        :rtype: None Do not return anything, modify arr in-place instead.
+        """
+        shift = 0
+        length = len(arr)
+        for i in range(length):
+            if arr[i] == 0:
+                shift += 1
+
+        for i in range(length - 1, -1, -1):
+            if i + shift < length:
+                arr[i + shift] = arr[i]
+            if arr[i] == 0:
+                shift -= 1
+                if i + shift < length:
+                    arr[i + shift] = 0
