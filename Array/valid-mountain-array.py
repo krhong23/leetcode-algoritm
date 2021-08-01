@@ -14,3 +14,24 @@ class Solution(object):
                 top = True
 
         return top
+
+
+class OnePassSolution(object):
+    def validMountainArray(self, arr):
+        """
+        :type arr: List[int]
+        :rtype: bool
+        """
+        length = len(arr)
+        i = 0
+
+        while i + 1 < length and arr[i] < arr[i + 1]:
+            i += 1
+
+        if i == 0 or i == length - 1:
+            return False
+
+        while i + 1 < length and arr[i] > arr[i + 1]:
+            i += 1
+
+        return i == length - 1
