@@ -16,7 +16,6 @@ Notice that you should not modify the linked list.
 #         self.val = x
 #         self.next = None
 
-
 class Solution(object):
     def detectCycle(self, head):
         """
@@ -25,12 +24,12 @@ class Solution(object):
         """
         slow = head
         fast = head
-        pos = -1
         while fast is not None and fast.next is not None:
             slow = slow.next
             fast = fast.next.next
-
             if slow is fast:
-                return slow if slow is head else slow.next
-
+                while head is not slow:
+                    slow = slow.next
+                    head = head.next
+                return head
         return None
