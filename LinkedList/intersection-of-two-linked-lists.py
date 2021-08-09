@@ -11,7 +11,7 @@ If the two linked lists have no intersection at all, return null.
 #         self.val = x
 #         self.next = None
 
-class Solution(object):
+class TimeLimitExceededSolution(object):
     def getIntersectionNode(self, headA, headB):
         """
         :type head1, head1: ListNode
