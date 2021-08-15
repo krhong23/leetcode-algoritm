@@ -19,30 +19,19 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
-        count = 0
-        node = head
-        odd = None
-        even = None
-        while node is not None:
-            if count % 2 == 0:
-                odd = self._addNode(odd, node)
-                print('odd', count, node)
-            else:
-                even = self._addNode(even, node)
-                print('even', count, node)
-            node = node.next
-            count += 1
-        print('ODD', odd)
-        print('EVEN', even)
-        result = None
-        while odd is not None:
+        if head is None:
+            return None
 
-        odd.next = even
-        return odd
+        odd = head
+        even = head.next
+        evenHead = even
 
-    def _addNode(self, nodes, node):
-        if nodes is None:
-            nodes = node
-        else:
-            nodes.next = node
-        return nodes
+        while even is not None and even.next is not None:
+            odd.next = even.next
+            odd = odd.next
+            even.next = odd.next
+            even = odd.next
+
+        odd.next = evenHead
+
+        return head
