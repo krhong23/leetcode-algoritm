@@ -1,11 +1,11 @@
 # problem: Design your implementation of the linked list. You can choose to use a singly or doubly linked list.
-
 class Node(object):
 
     def __init__(self, val):
         self.val = val
         self.prev = None
         self.next = None
+
 
 class MyLinkedList(object):
 
@@ -16,6 +16,8 @@ class MyLinkedList(object):
         self.head = None
         self.size = 0
 
+    def _addSize(self, val):
+        self.size += val
 
     def get(self, index):
         """
@@ -23,17 +25,13 @@ class MyLinkedList(object):
         :type index: int
         :rtype: int
         """
-        if self.head is None:
+        if index < 0 or index >= self.size or self.head is None:
             return -1
-        if self.size < index or index < 0:
-            return -1
+
         curr = self.head
         for i in range(index):
             curr = curr.next
         return curr.val
-
-    def addSize(self, val):
-        self.size += val
 
     def addAtHead(self, val):
         """
@@ -44,10 +42,7 @@ class MyLinkedList(object):
         node = Node(val)
         node.next = self.head
         self.head = node
-
-        print('1', self.head.val)
-        self.addSize(1)
-
+        self._addSize(1)
 
     def addAtTail(self, val):
         """
@@ -56,16 +51,17 @@ class MyLinkedList(object):
         :rtype: None
         """
         curr = self.head
-        for i in range(self.size -1):
-            curr = curr.next
-        node = Node(val)
-        node.prev = curr
-        curr.next = node
-        print('2', self.head.val)
-        print('2', node.prev.val)
+        size = self.size
+        if curr is None:
+            self.addAtHead(val)
+        else:
+            while curr.next:
+                curr = curr.next
 
-        self.addSize(1)
-
+            node = Node(val)
+            node.prev = curr
+            curr.next = node
+            self._addSize(1)
 
     def addAtIndex(self, index, val):
         """
@@ -74,26 +70,21 @@ class MyLinkedList(object):
         :type val: int
         :rtype: None
         """
-        curr = self.head
         if index == 0:
             self.addAtHead(val)
-            return
-
-        for i in range(index):
-            curr = curr.next
-
-        if curr is None:
+        elif index == self.size:
             self.addAtTail(val)
-            return
+        else:
+            curr = self.head
 
-        node = Node(val)
-        node.prev = curr.prev
-        node.next = curr
+            for i in range(index - 1):
+                curr = curr.next
 
-        curr.prev.next = node
-        curr.prev = node
-
-        self.addSize(1)
+            node = Node(val)
+            node.prev = curr
+            node.next = curr.next
+            curr.next = node
+            self._addSize(1)
 
     def deleteAtIndex(self, index):
         """
@@ -101,17 +92,18 @@ class MyLinkedList(object):
         :type index: int
         :rtype: None
         """
-        if index < 0 or index > self.size:
+        if index < 0 or index >= self.size:
             return -1
 
         curr = self.head
-        for i in range(index):
-            curr = curr.next
 
-        print(curr.val)
-        if curr is not None and curr.next is not None:
-            prev = curr.prev
-            prev.next = curr.next
-            curr.prev = prev
-
-            self.addSize(-1)
+        if index == 0:
+            self.head = curr.next
+        else:
+            for i in range(index - 1):
+                curr = curr.next
+            node = curr.next
+            curr.next = node.next
+            if node.next is not None:
+                node.next.prev = curr
+        self._addSize(-1)
