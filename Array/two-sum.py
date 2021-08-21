@@ -18,3 +18,19 @@ class Solution(object):
             for j in range(i + 1, len(nums)):
                 if nums[i] + nums[j] == target:
                     return [i, j]
+
+
+class HashTableSolution(object):
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        hash_table = {}
+        for i, num in enumerate(nums):
+            pair = target - num
+            if pair in hash_table:
+                return [hash_table[pair], i]
+            else:
+                hash_table[num] = i
