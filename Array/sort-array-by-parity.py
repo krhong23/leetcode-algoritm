@@ -15,3 +15,15 @@ class Solution(object):
                 nums[beg], nums[end] = nums[end], nums[beg]
                 end -= 1
         return nums
+
+
+class SortSolution(object):
+    def sortArrayByParity(self, A):
+        A.sort(key=lambda x: x % 2)
+        return A
+
+
+class TwoPassSolution(object):
+    def sortArrayByParity(self, A):
+        return ([x for x in A if x % 2 == 0] +
+                [x for x in A if x % 2 == 1])
