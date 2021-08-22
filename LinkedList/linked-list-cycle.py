@@ -11,10 +11,10 @@ Return true if there is a cycle in the linked list. Otherwise, return false.
 
 
 # Definition for singly-linked list.
-# class ListNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
+class ListNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.next = None
 
 
 class Solution(object):
@@ -31,4 +31,20 @@ class Solution(object):
             if slow is fast:
                 return True
 
+        return False
+
+
+class HashTableSolution(object):
+    def hasCycle(self, head):
+        """
+        :type head: ListNode
+        :rtype: bool
+        """
+        dictionary = {}
+        while head:
+            if head in dictionary:
+                return True
+            else:
+                dictionary[head] = True
+            head = head.next
         return False
