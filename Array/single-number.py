@@ -15,3 +15,11 @@ class Solution(object):
         for n in nums:
             if nums.count(n) < 2:
                 return n
+
+
+class BitManipulationSolution(object):
+    def singleNumber(self, nums):
+        a = 0
+        for i in nums:
+            a ^= i
+        return a
