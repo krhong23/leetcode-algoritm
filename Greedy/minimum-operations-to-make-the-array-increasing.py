@@ -18,13 +18,10 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        minimum = nums[0]
-        for i, v in enumerate(nums):
-            if i == 0:
-                pass
-            elif minimum >= v:
-                nums[i] = minimum + 1
-                minimum = nums[i]
-                print(nums, minimum)
+        result = 0
+        for i in range(1, len(nums)):
+            maxNum = max(nums[i - 1] + 1, nums[i])
+            result += (maxNum - nums[i])
+            nums[i] = maxNum
 
-        return sum(nums)
+        return result
