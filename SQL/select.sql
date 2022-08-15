@@ -23,3 +23,14 @@ SELECT name
   FROM Customer
  WHERE referee_id != 2
     OR referee_id IS NULL;
+
+-- 183. Customers Who Never Order
+-- Write an SQL query to report all customers who never order anything.
+-- Return the result table in any order.
+SELECT c.name AS 'Customers'
+  FROM Customers AS c
+ WHERE c.id NOT IN
+       (
+           SELECT customerId
+             FROM Orders
+       );
