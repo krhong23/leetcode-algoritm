@@ -4,8 +4,8 @@
 -- The query result format is in the following example.
 
 -- case1. Concat
-  SELECT user_id, CONCAT(UPPER(SUBSTR(name, 1, 1)), LOWER(SUBSTR(name,2))) AS name
-    FROM Users
+SELECT user_id, CONCAT(UPPER(SUBSTR(name, 1, 1)), LOWER(SUBSTR(name, 2))) AS name
+FROM Users
 ORDER BY user_id ASC;
 
 -- 1484. Group Sold Products By The Date
@@ -21,3 +21,15 @@ ORDER BY user_id ASC;
     FROM Activities
 GROUP BY sell_date
 ORDER BY sell_date, product;
+
+-- 1527. Patients With a Condition
+-- Write an SQL query to report the patient_id, patient_name all conditions of patients who have Type I Diabetes.
+-- Type I Diabetes always starts with DIAB1 prefix
+-- Return the result table in any order.
+-- The query result format is in the following example.
+
+-- case1. LIKE
+SELECT patient_id, patient_name, conditions
+  FROM Patients
+ WHERE conditions LIKE 'DIAB1%'
+    OR conditions LIKE '% DIAB1%';
