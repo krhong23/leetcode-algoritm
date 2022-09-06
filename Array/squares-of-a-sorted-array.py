@@ -1,4 +1,5 @@
-# problem: Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.
+# 977. Squares of a Sorted Array
+# Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.
 
 import collections
 
@@ -33,3 +34,14 @@ class DequeSolution(object):
                 answer.appendleft(right * right)
                 r -= 1
         return list(answer)
+
+
+class AnotherSolution:
+    def sortedSquares(self, nums: List[int]) -> List[int]:
+        length = len(nums)
+        array = [0] * length
+        for i in range(0, length):
+            array[i] = nums[i] * nums[i]
+            i += 1
+        array.sort()
+        return array
