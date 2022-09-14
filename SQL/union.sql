@@ -27,3 +27,11 @@ GROUP BY customer_id
     FROM Visits AS v LEFT JOIN Transactions AS t ON v.visit_id = t.visit_id
    WHERE t.visit_id IS NULL
 GROUP BY customer_id
+
+-- 1148. Article Views I
+-- Write an SQL query to find all the authors that viewed at least one of their own articles.
+-- Return the result table sorted by id in ascending order.
+  SELECT DISTINCT author_id AS id
+    FROM Views
+   WHERE author_id = viewer_id
+ORDER BY author_id
