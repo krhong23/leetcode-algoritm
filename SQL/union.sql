@@ -42,3 +42,18 @@ ORDER BY author_id
 SELECT w1.id AS 'Id'
   FROM Weather w1 JOIN Weather AS w2 ON DATEDIFF(w1.recordDate, w2.recordDate) = 1
    AND w1.temperature > w2.temperature
+
+-- 607. Sales Person
+-- Write an SQL query to report the names of all the salespersons who did not have any orders related to the company with the name "RED".
+-- Return the result table in any order.
+SELECT name
+  FROM SalesPerson
+ WHERE sales_id NOT IN (
+     SELECT sales_id
+       FROM Orders
+      WHERE com_id = (
+          SELECT com_id
+            FROM Company
+           WHERE name = 'RED'
+          )
+     )
