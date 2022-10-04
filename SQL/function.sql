@@ -6,3 +6,10 @@
     FROM Activity
 GROUP BY activity_date
   HAVING activity_date <= '2019-07-27' AND activity_date > '2019-06-27'
+
+-- 1693. Daily Leads and Partners
+-- Write an SQL query that will, for each date_id and make_name, return the number of distinct lead_id's and distinct partner_id's.
+-- Return the result table in any order.
+  SELECT date_id, make_name, COUNT(DISTINCT lead_id) AS 'unique_leads', COUNT(DISTINCT partner_id) AS 'unique_partners'
+    FROM DailySales
+GROUP BY date_id, make_name
