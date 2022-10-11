@@ -42,3 +42,13 @@ ORDER BY CNT DESC
   SELECT player_id, MIN(event_date) AS first_login
     FROM Activity
 GROUP BY player_id
+
+-- 1890. The Latest Login in 2020
+-- Write an SQL query to report the latest login for all users in the year 2020.
+-- Do not include the users who did not login in 2020.
+-- Return the result table in any order.
+  SELECT user_id, MAX(time_stamp) AS last_stamp
+    FROM Logins
+   WHERE time_stamp >= '2020-01-01'
+     AND time_stamp < '2021-01-01'
+GROUP BY user_id
