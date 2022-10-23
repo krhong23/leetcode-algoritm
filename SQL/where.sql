@@ -13,3 +13,13 @@ GROUP BY email
     FROM ActorDirector
 GROUP BY actor_id, director_id
   HAVING COUNT(*) >= 3
+
+-- 1587. Bank Account Summary II
+-- Write an SQL query to report the name and balance of users with a balance higher than 10000.
+-- The balance of an account is equal to the sum of the amounts of all transactions involving that account.
+-- Return the result table in any order.
+  SELECT name, SUM(amount) AS 'balance'
+    FROM Users AS a, Transactions AS b
+   WHERE a.account = b.account
+GROUP BY a.account
+  HAVING SUM(amount) > 10000
