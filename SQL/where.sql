@@ -23,3 +23,14 @@ GROUP BY actor_id, director_id
    WHERE a.account = b.account
 GROUP BY a.account
   HAVING SUM(amount) > 10000
+
+-- 1084. Sales Analysis III
+-- Write an SQL query that reports the products that were only sold in the first quarter of 2019.
+-- That is, between 2019-01-01 and 2019-03-31 inclusive.
+-- Return the result table in any order.
+  SELECT a.product_id, a.product_name
+    FROM Product AS a, Sales AS b
+   WHERE a.product_id = b.product_id
+GROUP BY a.product_id
+  HAVING  MIN(sale_date) >= '2019-01-01'
+     AND MAX(sale_date) <= '2019-03-31'
